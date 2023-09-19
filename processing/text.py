@@ -8,7 +8,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from config import Config
 from agent.llm_utils import create_chat_completion
 import os
-from md2pdf.core import md2pdf
+# from md2pdf.core import md2pdf
 
 CFG = Config()
 
@@ -157,9 +157,9 @@ def read_txt_files(directory):
     return all_text
 
 
-def md_to_pdf(input_file, output_file):
-    md2pdf(output_file,
-           md_content=None,
-           md_file_path=input_file,
-           css_file_path=None,
-           base_url=None)
+# def md_to_pdf(input_file, output_file):
+#     md2pdf(output_file,
+#            md_content=None,
+#            md_file_path=input_file,
+#            css_file_path=None,
+#            base_url=None)
