@@ -123,14 +123,16 @@ def generate_survey_answer_prompt(surveyForm, research_summary):
     #         "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
     #        "Write all used source urls at the end of the report in apa format"
     return f'"""{research_summary}""" Using the above information, answer the following'\
-           f'{surveyForm}" --' """.The survey will utilize a 5-point Likert scale for responses.
-Meaning of the Likert numbers:
+           return f'"""{research_summary}""" Using the above information, answer the following' \
+                  f' question or topic: "{surveyForm}" --' \
+                  """.The survey will utilize a 5-point Likert scale for responses.
+       Meaning of the Likert numbers:
 
-- 1: Strongly agree
-- 2: Agree
-- 3: Neutral
-- 4: Disagree
-- 5: Strongly disagree"""
+       - 1: Strongly agree
+       - 2: Agree
+       - 3: Neutral
+       - 4: Disagree
+       - 5: Strongly disagree"""
 
 def auto_agent_instructions():
     return """
