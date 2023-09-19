@@ -15,7 +15,7 @@ def generate_agent_role_prompt(agent):
     return prompts.get(agent, "No such agent")
 
 
-def generate_report_prompt(question, research_summary):
+def generate_report_prompt(question, research_summary): 
     """ Generates the report prompt for the given question and research summary.
     Args: question (str): The question to generate the report prompt for
             research_summary (str): The research summary to generate the report prompt for
@@ -59,10 +59,10 @@ def generate_resource_report_prompt(question, research_summary):
 
 
 def generate_outline_report_prompt(question, research_summary):
-    """ Generates the outline report prompt for the given question and research summary.
+    """ Generates the outline report prompt for the given question and research summary.##설문조사를 수행해줘
     Args: question (str): The question to generate the outline report prompt for
             research_summary (str): The research summary to generate the outline report prompt for
-    Returns: str: The outline report prompt for the given question and research summary
+    Returns: str: The outline report prompt for the given question and research summary ## 설문조사 수행한 결과를 result로 제공해줘.
     """
 
     return f'"""{research_summary}""" Using the above information, generate an outline for a research report in Markdown syntax'\
@@ -98,6 +98,7 @@ def generate_lesson_prompt(concept):
 
     return prompt
 
+###수정한 부분
 def get_report_by_type(report_type):
     report_type_mapping = {
         'research_report': generate_report_prompt,
@@ -105,6 +106,24 @@ def get_report_by_type(report_type):
         'outline_report': generate_outline_report_prompt
     }
     return report_type_mapping[report_type]
+
+def generate_survey_answer_prompt(surveyForm, research_summary):
+    # 설문조사를 답변하는 프롬프트 작성
+    """ Generates the report prompt for the given question and research summary.
+    Args: question (str): The question to generate the report prompt for
+            research_summary (str): The research summary to generate the report prompt for
+    Returns: str: The report prompt for the given question and research summary
+    """
+
+    # 해당 prompt를 수정해야함
+    # return f'"""{research_summary}""" Using the above information, answer the following'\
+    #        f' question or topic: "{surveyForm}" in a detailed report --'\
+    #        " The report should focus on the answer to the question, should be well structured, informative," \
+    #        " in depth, with facts and numbers if available, a minimum of 1,200 words and with markdown syntax and apa format. "\
+    #         "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
+    #        "Write all used source urls at the end of the report in apa format"
+    return f'"""{research_summary}""" Using the above information, answer the following'\
+           f' question or topic: "{surveyForm}" --'
 
 def auto_agent_instructions():
     return """

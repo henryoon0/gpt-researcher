@@ -139,7 +139,7 @@ def write_to_file(filename: str, text: str) -> None:
 async def write_md_to_pdf(task: str, directory_name: str, text: str) -> None:
     file_path = f"./outputs/{directory_name}/{task}"
     write_to_file(f"{file_path}.md", text)
-    md_to_pdf(f"{file_path}.md", f"{file_path}.pdf")
+    # md_to_pdf(f"{file_path}.md", f"{file_path}.pdf")
     print(f"{task} written to {file_path}.pdf")
 
     encoded_file_path = urllib.parse.quote(f"{file_path}.pdf")

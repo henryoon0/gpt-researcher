@@ -23,7 +23,7 @@ CFG = Config()
 
 
 class ResearchAgent:
-    def __init__(self, question, agent, agent_role_prompt, websocket):
+    def __init__(self, question, agent, surveyForm, agent_role_prompt, websocket):
         """ Initializes the research assistant with the given question.
         Args: question (str): The question to research
         Returns: None
@@ -31,6 +31,7 @@ class ResearchAgent:
 
         self.question = question
         self.agent = agent
+        self.surveyForm = surveyForm
         self.agent_role_prompt = agent_role_prompt if agent_role_prompt else prompts.generate_agent_role_prompt(agent)
         self.visited_urls = set()
         self.research_summary = ""
@@ -158,21 +159,40 @@ class ResearchAgent:
 
         await self.websocket.send_json({"type": "logs", "output": f"I will research based on the following concepts: {result}\n"})
         return json.loads(result)
+    
 
-    async def conduct_survey(self, survey_type, websocket):
-        """ Conducts the survey for the given question.
+    async def write_report(self, report_type, websocket):
+        """ Writes the report for the given question.
         Args: None
-        Returns: str: The survey for the given question
+        Returns: str: The report for the given question
         """
-        survey_type_func = prompts.get_survey_by_type(survey_type)
+        report_type_func = prompts.get_report_by_type(report_type)
         await websocket.send_json(
-            {"type": "logs", "output": f"📝 Conducting {survey_type} survey for research task: {self.question}..."})
-        answer = await self.call_agent(survey_type_func(self.question, self.research_summary), stream=True,
+            {"type": "logs", "output": f"✍️ Writing {report_type} for research task: {self.question}..."})
+        answer = await self.call_agent(report_type_func(self.question, self.research_summary), stream=True,
+                                       websocket=websocket)
+        path = await write_md_to_pdf(report_type, self.directory_name, await answer)
+
+        survey_answer = await self.call_agent(prompts.generate_survey_answer_prompt(self.surveyForm, self.research_summary), stream=True,
                                        websocket=websocket)
 
-        path = await write_md_to_pdf(survey_type, self.directory_name, await answer)
+        return survey_answer, path
 
-        return answer, path
+
+    # async def conduct_survey(self, survey_type, websocket):
+    #     """ Conducts the survey for the given question.
+    #     Args: None
+    #     Returns: str: The survey for the given question
+    #     """
+    #     survey_type_func = prompts.get_survey_by_type(survey_type)
+    #     await websocket.send_json(
+    #         {"type": "logs", "output": f"📝 Conducting {survey_type} survey for research task: {self.question}..."})
+    #     answer = await self.call_agent(survey_type_func(self.question, self.research_summary), stream=True,
+    #                                    websocket=websocket)
+
+    #     path = await write_md_to_pdf(survey_type, self.directory_name, await answer)
+
+    #     return answer, path
 
     async def write_lessons(self):
         """ Writes lessons on essential concepts of the research.
