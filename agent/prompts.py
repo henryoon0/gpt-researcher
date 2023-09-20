@@ -23,9 +23,8 @@ def generate_report_prompt(question, research_summary):
     """
 
     return f'"""{research_summary}""" Using the above information, answer the following'\
-           f' question or topic: "{question}" in a detailed report --'\
-           f' The report should focus on the answer to the question, should be based on the persona that the user requires.' \
-           f' The survey will utilize a 5-point Likert scale for responses.'\
+           f' question or topic: "{question}" in Likert 1-5 response. you should answer one answer of each question. --'\
+           f' Your response should be based on the persona that the user requires.' \
            f' Meaning of the Likert numbers:'\
            f' - 1: Strongly agree'\
            f' - 2: Agree'\
