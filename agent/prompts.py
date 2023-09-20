@@ -24,10 +24,15 @@ def generate_report_prompt(question, research_summary):
 
     return f'"""{research_summary}""" Using the above information, answer the following'\
            f' question or topic: "{question}" in a detailed report --'\
-           " The report should focus on the answer to the question, should be well structured, informative," \
-           " in depth, with facts and numbers if available, a minimum of 1,200 words and with markdown syntax and apa format. "\
-            "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
-           "Write all used source urls at the end of the report in apa format"
+           f' The report should focus on the answer to the question, should be based on the persona that the user requires.' \
+           f' The survey will utilize a 5-point Likert scale for responses.'\
+           f' Meaning of the Likert numbers:'\
+           f' - 1: Strongly agree'\
+           f' - 2: Agree'\
+           f' - 3: Neutral'\
+           f' - 4: Disagree'\
+           f' - 5: Strongly disagree.'\
+           f' Write all used source URLs at the end of the report in APA format.'
 
 def generate_search_queries_prompt(question):
     """ Generates the search queries prompt for the given question.
@@ -123,11 +128,9 @@ def generate_survey_answer_prompt(surveyForm, research_summary):
     #         "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
     #        "Write all used source urls at the end of the report in apa format"
     return f'"""{research_summary}""" Using the above information, answer the following'\
-           return f'"""{research_summary}""" Using the above information, answer the following' \
-                  f' question or topic: "{surveyForm}" --' \
+        f' question or topic: "{surveyForm}" --' \
                   """.The survey will utilize a 5-point Likert scale for responses.
        Meaning of the Likert numbers:
-
        - 1: Strongly agree
        - 2: Agree
        - 3: Neutral
