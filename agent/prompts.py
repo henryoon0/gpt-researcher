@@ -4,13 +4,16 @@ def generate_agent_role_prompt(agent):
     Returns: str: The agent role prompt.
     
     ** 에이전트를 전반적으로 수정하였음 **
+
+    목적: 신제품 안마의자를 기획하는 상황에서 소비자들의 반응이나 특성을 기반으로 설문을 진행할 예정. 이를 위한 UXResearch.
     
     """
     prompts = {
+        "Consumer Behavior Agent": "You are an AI agent focused on consumer behavior analysis. Your main objective is to investigate purchasing patterns, preferences, and general behaviors of consumers in relation to specific products or market categories. Provide a thorough report based on the analysis, spotlighting potential opportunities and threats within the market.",
+        "Competitor Analysis Agent": "You are an AI agent focused on competitor analysis. Your main task is to scrutinize competitor products, pricing, and marketing strategies, and provide a detailed report that will assist in positioning our product effectively within the market, identifying potential advantages and areas for improvement.",
+        "Customer Feedback Agent": "You are an AI agent dedicated to analyzing customer feedback and reviews. Your main goal is to explore feedback for existing products or services, extract meaningful insights, and provide a thorough report that can guide enhancements and boost customer satisfaction.",
         "New Product Development Agent": "You are an AI agent specialized in market analysis for new product development. Your primary goal is to analyze the characteristics of current consumers, their preferences, and the features they prefer in products. For example, you may analyze whether they prefer voice recognition features. Based on this analysis, you will provide a comprehensive report on the market trends and consumer preferences to aid in the development of new products.",
         "Social Media Agent": "You are an AI agent specialized in social media analysis. Your primary goal is to analyze social media trends and provide insights into the behavior of social media users. Based on this analysis, you will provide a comprehensive report on social media trends and user behavior to aid in the development of social media strategies.",
-        "Healthcare Agent": "You are an AI agent specialized in healthcare analysis. Your primary goal is to analyze healthcare trends and provide insights into the behavior of healthcare consumers. Based on this analysis, you will provide a comprehensive report on healthcare trends and consumer behavior to aid in the development of healthcare strategies.",
-        "Education Agent": "You are an AI agent specialized in education analysis. Your primary goal is to analyze education trends and provide insights into the behavior of students and educators. Based on this analysis, you will provide a comprehensive report on education trends and behavior to aid in the development of education strategies.",
         "Marketing Agent": "You are an AI agent specialized in marketing analysis. Your primary goal is to analyze marketing trends and provide insights into the behavior of consumers. Based on this analysis, you will provide a comprehensive report on marketing trends and consumer behavior to aid in the development of marketing strategies.",
         "Market Research Agent": "You are an AI agent specialized in market research. Your primary goal is to analyze market trends and provide insights into consumer behavior. Based on this analysis, you will provide a comprehensive report on market trends and consumer behavior to aid in the development of market strategies.",
     }
@@ -53,7 +56,7 @@ def generate_search_queries_prompt(question, purpose):
     """
 
     return f'Take a deep breath and work on this problem step-by-step.'\
-           f'Write 4 google search queries to search online that form an objective opinion from the following: "{question}"'\
+           f'Write 4 google search queries to search online that form an objective opinion from the following: "{purpose}"'\
            f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4"]'
     return prompts.get(agent, "No such agent")
 
@@ -132,21 +135,22 @@ def generate_search_queries_prompt(question):
 #            ' The research report should be detailed, informative, in-depth, and a minimum of 1,200 words.' \
 #            ' Use appropriate Markdown syntax to format the outline and ensure readability.'
 
-def generate_concepts_prompt(question, research_summary):
-    """ Generates the concepts prompt for the given question.
-    Args: question (str): The question to generate the concepts prompt for
+def generate_concepts_prompt(purpose, research_summary):
+    """ Generates the concepts prompt for the given purpose.
+    Args: purpose (str): The purpose to generate the concepts prompt for
             research_summary (str): The research summary to generate the concepts prompt for
-    Returns: str: The concepts prompt for the given question
+    Returns: str: The concepts prompt for the given purpose
 
-    추가된 부분: 
-    1) Question => purpose로 바꾸기
-    2) 
-
+    Generate 5 types of highly intelligent expert opinions from Product Managers. 
+    Format: 
+    ex) 
+    Expert 1: 
+    Expert 2:
     """
 
-    return f'"""{research_summary}""" Using the above information, generate a list of 5 main concepts to learn for conducting a survey'\
-           f' on the following question or topic: "{question}". The outline should provide a well-structured framework'\
-           'You must respond with a list of strings in the following format: ["concepts 1", "concepts 2", "concepts 3", "concepts 4, concepts 5"]'
+    return f'"""{research_summary}""" Using the above information, generate a list of 5 highly intelligent expert opinions from Product Managers'\
+           f' on the following purpose: "{purpose}". The list should provide a well-structured framework.'\
+           ' You must respond with a list of strings in the following format: ["Expert 1: ", "Expert 2: ", "Expert 3: ", "Expert 4: ", "Expert 5: "]'
 
 
 
@@ -212,22 +216,22 @@ def auto_agent_instructions():
         The agent is determined by the field of the topic and the specific name of the agent that could be utilized to research the topic provided. Agents are categorized by their area of expertise, and each agent type is associated with a corresponding emoji.
 
         examples:
-        task: "should I invest in apple stocks?"
+        task: "Research the impact of age on consumer behavior in the United States."
         response: 
         {
-            "agent": "💰 Finance Agent",
-            "agent_role_prompt: "You are a seasoned finance analyst AI assistant. Your primary goal is to compose comprehensive, astute, impartial, and methodically arranged financial reports based on provided data and trends."
+            "agent": "Consumer Behavior Agent",
+            "agent_role_prompt": "You are an AI agent focused on consumer behavior analysis. Your main objective is to investigate how age affects purchasing patterns, preferences, and general behaviors of consumers in the South Korea. Provide a thorough report based on the analysis, spotlighting potential opportunities and threats within the market."
         }
-        task: "could reselling sneakers become profitable?"
+        task: "Analyze the impact of cultural differences on social media usage in South Korea."
         response: 
         { 
-            "agent":  "📈 Business Analyst Agent",
-            "agent_role_prompt": "You are an experienced AI business analyst assistant. Your main objective is to produce comprehensive, insightful, impartial, and systematically structured business reports based on provided business data, market trends, and strategic analysis."
+            "agent":  "Social Media Agent",
+            "agent_role_prompt": "You are an AI agent specialized in social media analysis. Your primary goal is to analyze social media trends and provide insights into the behavior of social media users in South Korea. Based on this analysis, you will provide a comprehensive report on social media trends and user behavior to aid in the development of social media strategies."
         }
-        task: "what` are the most interesting sites in Tel Aviv?"
+        task: "Analyze customer feedback for a new product in Germany."
         response:
         {
-            "agent:  "🌍 Travel Agent",
-            "agent_role_prompt": "You are a world-travelled AI tour guide assistant. Your main purpose is to draft engaging, insightful, unbiased, and well-structured travel reports on given locations, including history, attractions, and cultural insights."
+            "agent:  "Customer Feedback Agent",
+            "agent_role_prompt": "You are an AI agent dedicated to analyzing customer feedback and reviews for a new product in South Korea. Your main goal is to explore feedback for the product, extract meaningful insights, and provide a thorough report that can guide enhancements and boost customer satisfaction."
         }
-    """
+"""
