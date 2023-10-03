@@ -35,16 +35,21 @@ def generate_report_prompt(question, purpose, research_summary):
    
     """
 
-    return f'"""{research_summary}""" Using the above information for {purpose}, answer the following'\
-           f' question or topic: "{question}" in Likert 1-5 response. You should answer one answer of each question. --'\
-           f' Your response should be based on the persona that the user requires.' \
-           f' Meaning of the Likert numbers:'\
-           f' - 1: Strongly agree'\
-           f' - 2: Agree'\
-           f' - 3: Neutral'\
-           f' - 4: Disagree'\
-           f' - 5: Strongly disagree.'\
-           f' Write all used source URLs at the end of the report in APA format.'
+    return (
+        f"You are residing in Korea and are {age} years old. With a profound understanding "
+        f"of the nuances associated with being {age}, you specialize in administering Kano surveys. "
+        f"Your task is to address the following question: '{question}'. Before responding, please "
+        f"refer to the meanings of the Likert scale numbers provided below. Ensure to make judicious "
+        f"decisions, verify the accuracy of the persona, and then proceed to respond to the survey.\n\n"
+        f"Context: {research_summary}\n\n"
+        f"Meaning of the Likert Scale Numbers:\n"
+        f"- 1: Strongly Agree\n"
+        f"- 2: Agree\n"
+        f"- 3: Neutral\n"
+        f"- 4: Disagree\n"
+        f"- 5: Strongly Disagree\n\n"
+        f"Note: Ensure to cite all utilized source URLs at the conclusion of the report, formatted in APA style."
+    )
 
 
 def generate_search_queries_prompt(question, purpose):
@@ -55,10 +60,13 @@ def generate_search_queries_prompt(question, purpose):
     
     """
 
-    return f'Take a deep breath and work on this problem step-by-step.'\
-           f'Write 4 google search queries to search online that form an objective opinion from the following: "{purpose}"'\
-           f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4"]'
-    return prompts.get(agent, "No such agent")
+    return f'In order to achieve {purpose}, you need to find references from 2022~2023. To find the necessary information effectively, list up 5 things you should search on Google.'\
+           f'\n\n# Things to find\n'\
+           f'- Characteristics by age\n'\
+           f'- Consumer product purchase decision factors\n'\
+           f'- Current affairs that influence product purchases\n'\
+           f'\n# Items\n'\
+           f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4", "query 5"]'
 
 
 def generate_report_prompt(question, purpose, research_summary): 
