@@ -60,13 +60,13 @@ def generate_search_queries_prompt(question, purpose):
     
     """
 
-    return f'In order to achieve {purpose}, you need to find references from 2022~2023. To find the necessary information effectively, list up 5 things you should search on Google.'\
-           f'\n\n# Things to find\n'\
-           f'- Characteristics by age\n'\
-           f'- Consumer product purchase decision factors\n'\
-           f'- Current affairs that influence product purchases\n'\
-           f'\n# Items\n'\
-           f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4", "query 5"]'
+    return f'To accomplish {purpose}, you need to gather references from 2022~2023. To efficiently obtain the required information, list 5 items you should search for on Google.'\
+           f'\n\n# Items to Find\n'\
+           f'- Characteristics related to {age} in South Korea\n'\
+           f'- Factors influencing product purchasing decisions in South Korea for {age} demographic\n'\
+           f'- Current events affecting product purchases in South Korea\n'\
+           f'\n# Response Format\n'\
+           f'Your response should be a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4", "query 5"]'
 
 
 def generate_report_prompt(question, purpose, research_summary): 
