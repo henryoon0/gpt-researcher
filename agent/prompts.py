@@ -62,11 +62,11 @@ def generate_search_queries_prompt(purpose, age):
     """
     print(purpose, age)
 
-    return f'To accomplish {purpose}, you need to gather references from 2022~2023. To efficiently obtain the required information, list 5 items you should search for on Google.'\
+    return f'To accomplish {purpose} for {age}, you need to gather references from 2022 ~ 2023 to know about {age} well. To efficiently obtain the required information, list 5 items you should search for on Google.'\
            f'\n\n# Items to Find\n'\
            f'- Characteristics related to {age} in South Korea\n'\
            f'- Factors influencing product purchasing decisions in South Korea for {age} demographic\n'\
-           f'- Current events affecting product purchases in South Korea\n'\
+           f'- What Koreans think about new technologies' \
            f'\n# Response Format\n'\
            f'Your response should be a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4", "query 5"]'
 
@@ -145,22 +145,22 @@ def generate_search_queries_prompt(purpose, age):
 #            ' The research report should be detailed, informative, in-depth, and a minimum of 1,200 words.' \
 #            ' Use appropriate Markdown syntax to format the outline and ensure readability.'
 
-def generate_concepts_prompt(purpose, research_summary):
-    """ Generates the concepts prompt for the given purpose.
-    Args: purpose (str): The purpose to generate the concepts prompt for
-            research_summary (str): The research summary to generate the concepts prompt for
-    Returns: str: The concepts prompt for the given purpose
+# def generate_concepts_prompt(purpose, research_summary):
+#     """ Generates the concepts prompt for the given purpose.
+#     Args: purpose (str): The purpose to generate the concepts prompt for
+#             research_summary (str): The research summary to generate the concepts prompt for
+#     Returns: str: The concepts prompt for the given purpose
 
-    Generate 5 types of highly intelligent expert opinions from Product Managers. 
-    Format: 
-    ex) 
-    Expert 1: 
-    Expert 2:
-    """
+#     Generate 5 types of highly intelligent expert opinions from Product Managers. 
+#     Format: 
+#     ex) 
+#     Expert 1: 
+#     Expert 2:
+#     """
 
-    return f'"""{research_summary}""" Using the above information, generate a list of 5 highly intelligent expert opinions from Product Managers'\
-           f' on the following purpose: "{purpose}". The list should provide a well-structured framework.'\
-           ' You must respond with a list of strings in the following format: ["Expert 1: ", "Expert 2: ", "Expert 3: ", "Expert 4: ", "Expert 5: "]'
+#     return f'"""{research_summary}""" Using the above information, generate a list of 5 highly intelligent expert opinions from Product Managers'\
+#            f' on the following purpose: "{purpose}". The list should provide a well-structured framework.'\
+#            ' You must respond with a list of strings in the following format: ["Expert 1: ", "Expert 2: ", "Expert 3: ", "Expert 4: ", "Expert 5: "]'
 
 
 
@@ -192,30 +192,30 @@ def get_report_by_type(report_type):
     }
     return report_type_mapping[report_type]
 
-def generate_survey_answer_prompt(surveyForm, research_summary):
-    # 설문조사를 답변하는 프롬프트 작성
-    """ Generates the report prompt for the given question and research summary.
-    Args: question (str): The question to generate the report prompt for
-            research_summary (str): The research summary to generate the report prompt for
-    Returns: str: The report prompt for the given question and research summary
-    """
+# def generate_survey_answer_prompt(surveyForm, research_summary):
+#     # 설문조사를 답변하는 프롬프트 작성
+#     """ Generates the report prompt for the given question and research summary.
+#     Args: question (str): The question to generate the report prompt for
+#             research_summary (str): The research summary to generate the report prompt for
+#     Returns: str: The report prompt for the given question and research summary
+#     """
 
-    # 해당 prompt를 수정해야함
-    # return f'"""{research_summary}""" Using the above information, answer the following'\
-    #        f' question or topic: "{surveyForm}" in a detailed report --'\
-    #        " The report should focus on the answer to the question, should be well structured, informative," \
-    #        " in depth, with facts and numbers if available, a minimum of 1,200 words and with markdown syntax and apa format. "\
-    #         "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
-    #        "Write all used source urls at the end of the report in apa format"
-    return f'"""{research_summary}""" Using the above information, answer the following'\
-        f' question or topic: "{surveyForm}" --' \
-                  """.The survey will utilize a 5-point Likert scale for responses.
-       Meaning of the Likert numbers:
-       - 1: Strongly agree
-       - 2: Agree
-       - 3: Neutral
-       - 4: Disagree
-       - 5: Strongly disagree"""
+#     # 해당 prompt를 수정해야함
+#     # return f'"""{research_summary}""" Using the above information, answer the following'\
+#     #        f' question or topic: "{surveyForm}" in a detailed report --'\
+#     #        " The report should focus on the answer to the question, should be well structured, informative," \
+#     #        " in depth, with facts and numbers if available, a minimum of 1,200 words and with markdown syntax and apa format. "\
+#     #         "You MUST determine your own concrete and valid opinion based on the given information. Do NOT deter to general and meaningless conclusions." \
+#     #        "Write all used source urls at the end of the report in apa format"
+#     return f'"""{research_summary}""" Using the above information, answer the following'\
+#         f' question or topic: "{surveyForm}" --' \
+#                   """.The survey will utilize a 5-point Likert scale for responses.
+#        Meaning of the Likert numbers:
+#        - 1: Strongly agree
+#        - 2: Agree
+#        - 3: Neutral
+#        - 4: Disagree
+#        - 5: Strongly disagree"""
 
 def auto_agent_instructions():
     return """
