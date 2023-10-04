@@ -54,7 +54,7 @@ def generate_report_prompt(question, purpose, research_summary):
     )
 
 
-def generate_search_queries_prompt(purpose, age):
+def generate_search_queries_prompt(purpose, age, question):
     """ Generates the search queries prompt for the given question.
     Args: question (str): The question to generate the search queries prompt for
           purpose (str): The purpose of the search queries prompt
@@ -63,7 +63,7 @@ def generate_search_queries_prompt(purpose, age):
     """
     print(purpose, age)
 
-    return f'To accomplish {purpose} for {age}, you need to gather references from 2022 ~ 2023 to know about {age} well. To efficiently obtain the required information, list 5 items you should search for on Google.'\
+    return f'To answer the survey question "{question}" based on a persona who is {age} for {purpose}, you need to gather reliable and recent references. To efficiently obtain the required information, list 5 items you should search for on Google.'\
            f'\n\n# Items to Find\n'\
            f'- Characteristics related to {age} in South Korea\n'\
            f'- Factors influencing product purchasing decisions in South Korea for {age} demographic\n'\

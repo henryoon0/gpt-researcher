@@ -93,7 +93,7 @@ class ResearchAgent:
         Args: None
         Returns: list[str]: The search queries for the given question
         """
-        result = await self.call_agent(prompts.generate_search_queries_prompt(self.purpose, self.age))
+        result = await self.call_agent(prompts.generate_search_queries_prompt(self.purpose, self.age, self.question))
         print(result)
         await self.websocket.send_json({"type": "logs", "output": f"🧠 I will conduct my research based on the following queries: {result}..."})
         return json.loads(result)
