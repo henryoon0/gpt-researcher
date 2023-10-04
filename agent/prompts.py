@@ -40,6 +40,7 @@ def generate_report_prompt(question, purpose, research_summary):
         f"Your task is to address the following question: '{question}'. Please refer to the "
         f"meanings of the Likert scale numbers provided below before responding. Ensure the "
         f"accuracy of the persona and respond to the survey accordingly.\n\n"
+        F"product: Massage chair"
         f"Context: {research_summary}\n\n"
         f"Meaning of Likert Scale:\n"
         f"- 1: Strongly Agree\n"
