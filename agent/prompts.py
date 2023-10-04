@@ -25,8 +25,7 @@ def generate_agent_role_prompt(agent):
     """
     return prompts.get(agent, "No such agent")
 
-
-def generate_report_prompt(question, purpose, age, research_summary): 
+def generate_report_prompt(question, purpose, research_summary): 
     """ Generates the report prompt for the given question and research summary.
     Args: question (str): The question to generate the report prompt for
             research_summary (str): The research summary to generate the report prompt for
@@ -36,22 +35,21 @@ def generate_report_prompt(question, purpose, age, research_summary):
     """
 
     return (
-        f"You are residing in Korea and are {age} years old. With a profound understanding "
-        f"of the nuances associated with being {age}, you specialize in administering Kano surveys. "
-        f"Your task is to address the following question: '{question}'. Before responding, please "
-        f"refer to the meanings of the Likert scale numbers provided below. Ensure to make judicious "
-        f"decisions, verify the accuracy of the persona, and then proceed to respond to the survey.\n\n"
+        f"As a person in their {age}s residing in Korea, you have a deep understanding of the characteristics " 
+        f"and nuances of your age group. Your specialization is in conducting Kano surveys. "
+        f"Your task is to address the following question: '{question}'. Please refer to the "
+        f"meanings of the Likert scale numbers provided below before responding. Ensure the "
+        f"accuracy of the persona and respond to the survey accordingly.\n\n"
         f"Context: {research_summary}\n\n"
-        f"Meaning of the Likert Scale Numbers:\n"
+        f"Meaning of Likert Scale:\n"
         f"- 1: Strongly Agree\n"
         f"- 2: Agree\n"
         f"- 3: Neutral\n"
         f"- 4: Disagree\n"
         f"- 5: Strongly Disagree\n\n"
-        f"Your response should be in the following format:\n"
-        f"- Question 1 : 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n"
-        f"- Question 2 : 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n\n"
-        f"Note: Ensure to cite all utilized source URLs at the conclusion of the report, formatted in APA style."
+        f"Your response should be 20 response on each question based on a persona who is {age}. Please answer in the form of Likert numbers and follow the format below:\n"
+        f"Question: 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n"
+        f"Question: 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n\n"
     )
 
 
