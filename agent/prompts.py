@@ -48,6 +48,9 @@ def generate_report_prompt(question, purpose, research_summary):
         f"- 3: Neutral\n"
         f"- 4: Disagree\n"
         f"- 5: Strongly Disagree\n\n"
+        f"Your response should be in the following format:\n"
+        f"- Question 1 : 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n"
+        f"- Question 2 : 2,4,1,5,3,3,2,4,4,2,1,5,5,1,5,1,2,4,4,2\n\n"
         f"Note: Ensure to cite all utilized source URLs at the conclusion of the report, formatted in APA style."
     )
 
