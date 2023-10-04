@@ -26,7 +26,7 @@ def generate_agent_role_prompt(agent):
     return prompts.get(agent, "No such agent")
 
 
-def generate_report_prompt(question, purpose, research_summary): 
+def generate_report_prompt(question, purpose, age, research_summary): 
     """ Generates the report prompt for the given question and research summary.
     Args: question (str): The question to generate the report prompt for
             research_summary (str): The research summary to generate the report prompt for
@@ -52,13 +52,14 @@ def generate_report_prompt(question, purpose, research_summary):
     )
 
 
-def generate_search_queries_prompt(question, purpose):
+def generate_search_queries_prompt(purpose, age):
     """ Generates the search queries prompt for the given question.
     Args: question (str): The question to generate the search queries prompt for
           purpose (str): The purpose of the search queries prompt
     Returns: str: The search queries prompt for the given question
     
     """
+    print(purpose, age)
 
     return f'To accomplish {purpose}, you need to gather references from 2022~2023. To efficiently obtain the required information, list 5 items you should search for on Google.'\
            f'\n\n# Items to Find\n'\
@@ -69,45 +70,45 @@ def generate_search_queries_prompt(question, purpose):
            f'Your response should be a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4", "query 5"]'
 
 
-def generate_report_prompt(question, purpose, research_summary): 
-    """ Generates the report prompt for the given question and research summary.
-    Args: question (str): The question to generate the report prompt for
-            research_summary (str): The research summary to generate the report prompt for
-    Returns: str: The report prompt for the given question and research summary
+# def generate_report_prompt(question, purpose, research_summary): 
+#     """ Generates the report prompt for the given question and research summary.
+#     Args: question (str): The question to generate the report prompt for
+#             research_summary (str): The research summary to generate the report prompt for
+#     Returns: str: The report prompt for the given question and research summary
    
-   **추가된 부분 
-   -{purpose}내용을 추가.
-   Purpose(목적의 예시: 신제품을 소비하는 10대의 특성을 파악하여 신제품에 대한 PMF를 파악하기 위해)에 기반한 Research summary를 활용하여
-   {question}을 수행해줘.
+#    **추가된 부분 
+#    -{purpose}내용을 추가.
+#    Purpose(목적의 예시: 신제품을 소비하는 10대의 특성을 파악하여 신제품에 대한 PMF를 파악하기 위해)에 기반한 Research summary를 활용하여
+#    {question}을 수행해줘.
    
    
-    """
+#     """
 
-    return f'"""{research_summary}""" Using the above information for {purpose}, answer the following'\
-           f' question or topic: "{question}" in Likert 1-5 response. you should answer one answer of each question. --'\
-           f' Your response should be based on the persona that the user requires.' \
-           f' Meaning of the Likert numbers:'\
-           f' - 1: Strongly agree'\
-           f' - 2: Agree'\
-           f' - 3: Neutral'\
-           f' - 4: Disagree'\
-           f' - 5: Strongly disagree.'\
-           f' Write all used source URLs at the end of the report in APA format.'
+#     return f'"""{research_summary}""" Using the above information for {purpose}, answer the following'\
+#            f' question or topic: "{question}" in Likert 1-5 response. you should answer one answer of each question. --'\
+#            f' Your response should be based on the persona that the user requires.' \
+#            f' Meaning of the Likert numbers:'\
+#            f' - 1: Strongly agree'\
+#            f' - 2: Agree'\
+#            f' - 3: Neutral'\
+#            f' - 4: Disagree'\
+#            f' - 5: Strongly disagree.'\
+#            f' Write all used source URLs at the end of the report in APA format.'
 
-def generate_search_queries_prompt(question):
-    """ Generates the search queries prompt for the given question.
-    Args: question (str): The question to generate the search queries prompt for
-    Returns: str: The search queries prompt for the given question
+# def generate_search_queries_prompt(question):
+#     """ Generates the search queries prompt for the given question.
+#     Args: question (str): The question to generate the search queries prompt for
+#     Returns: str: The search queries prompt for the given question
     
-      **추가된 부분 
-   - 여기에서 검색이 {question:설문조사}가 아니라 {purpose}가 들어가야함. 그로 인해 구글 검색이 목적에 맞게 최적의 구글 쿼리를 4가지를 뽑게 됨.
-   **Take a deep breath prompt 추가하여 검색의 결과를 더 잘 도출하게 Prompt 작성. **
+#       **추가된 부분 
+#    - 여기에서 검색이 {question:설문조사}가 아니라 {purpose}가 들어가야함. 그로 인해 구글 검색이 목적에 맞게 최적의 구글 쿼리를 4가지를 뽑게 됨.
+#    **Take a deep breath prompt 추가하여 검색의 결과를 더 잘 도출하게 Prompt 작성. **
     
-    """
+#     """
 
-    return f'Take a deep breath and work on this problem step-by-step.'\
-           f'Write 4 google search queries to search online that form an objective opinion from the following: "{question}"'\
-           f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4"]'
+#     return f'Take a deep breath and work on this problem step-by-step.'\
+#            f'Write 4 google search queries to search online that form an objective opinion from the following: "{question}"'\
+#            f'You must respond with a list of strings in the following format: ["query 1", "query 2", "query 3", "query 4"]'
 
 
 # def generate_resource_report_prompt(question, research_summary):

@@ -44,21 +44,22 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()
             if data.startswith("start"):
                 json_data = json.loads(data[6:])
-                task = json_data.get("task")
+                purpose = json_data.get("purpose")
                 report_type = json_data.get("report_type")
                 agent = json_data.get("agent")
+                age = json_data.get("age")
                 surveyForm = json_data.get("surveyForm")
                 # temporary so "normal agents" can still be used and not just auto generated, will be removed when we move to auto generated
                 if agent == "Auto Agent":
-                    agent_dict = choose_agent(task)
+                    agent_dict = choose_agent(purpose)
                     agent = agent_dict.get("agent")
                     agent_role_prompt = agent_dict.get("agent_role_prompt")
                 else:
                     agent_role_prompt = None
 
                 await websocket.send_json({"type": "logs", "output": f"Initiated an Agent: {agent}"})
-                if task and report_type and agent:
-                    await manager.start_streaming(task, report_type, agent, surveyForm, agent_role_prompt, websocket)
+                if purpose and report_type and agent:
+                    await manager.start_streaming(purpose, report_type, agent, age, surveyForm, agent_role_prompt, websocket)
                 else:
                     print("Error: not enough parameters provided.")
 

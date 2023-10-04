@@ -41,18 +41,17 @@ const GPTResearcher = (() => {
 
     socket.onopen = (event) => {
       const purpose = document.querySelector('input[name="purpose"]').value;
-      const report_type = document.querySelector(
-        'select[name="report_type"]'
-      ).value;
       const agent = document.querySelector('input[name="agent"]:checked').value;
+      const age = document.querySelector('select[name="age"]').value;
       const surveyForm = document.querySelector(
         'textarea[name="surveyForm"]'
       ).value;
 
       const requestData = {
         purpose: purpose,
-        report_type: report_type,
+        report_type: "research_report",
         agent: agent,
+        age: age,
         surveyForm: surveyForm,
       };
 

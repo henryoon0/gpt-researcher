@@ -34,19 +34,19 @@ class WebSocketManager:
         del self.sender_tasks[websocket]
         del self.message_queues[websocket]
 
-    async def start_streaming(self, purpose, report_type, agent, surveyForm, agent_role_prompt, websocket):
-        report, path = await run_agent(purpose, report_type, agent, surveyForm, agent_role_prompt, websocket)
+    async def start_streaming(self, purpose, report_type, agent, age, surveyForm, agent_role_prompt, websocket):
+        report, path = await run_agent(purpose, report_type, agent, age, surveyForm, agent_role_prompt, websocket)
         return report, path
 
 
-async def run_agent(purpose, report_type, agent, surveyForm, agent_role_prompt, websocket):
+async def run_agent(purpose, report_type, agent, age, surveyForm, agent_role_prompt, websocket):
     check_openai_api_key()
 
     start_time = datetime.datetime.now()
 
     # await websocket.send_json({"type": "logs", "output": f"Start time: {str(start_time)}\n\n"})
 
-    assistant = ResearchAgent(purpose, agent, surveyForm, agent_role_prompt, websocket)
+    assistant = ResearchAgent(purpose, agent, age, surveyForm, agent_role_prompt, websocket)
     await assistant.conduct_research()
 
     report, path = await assistant.write_report(report_type, websocket)
